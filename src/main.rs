@@ -252,7 +252,7 @@ pub extern "efiapi" fn efi_main(image_handle: Handle, system_table: *mut SystemT
                                         );
 
                                         if load_proto_status == Status::SUCCESS {
-                                            let cmdline_str = "initrd=\\EFI\\lazyboot\\initramfs-lts root=/dev/vda3 rw rootfstype=ext4 modules=ext4 earlycon=efifb console=tty0 loglevel=quiet\0";
+                                            let cmdline_str = "initrd=\\EFI\\lazyboot\\initramfs-lts root=/dev/vda3 rw rootfstype=ext4 modules=ext4 earlycon=efifb console=tty0 loglevel=4\0";
                                             let mut cmdline_utf16: [u16; 128] = [0; 128];
                                             let mut cmd_len = 0;
 
