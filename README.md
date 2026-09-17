@@ -1,9 +1,8 @@
 # rust-bootloader
 vibe coded bootloader by gemini
 
-## NOTE
-This bootloader only boot `bzImage` and `initramfs.img`, still aiming for custom initramfs instead full linux distro, you can modify it if you want.
-
+## UPDATE
+This bootloader now can boot alpine linux. For do that, see the `virt-manager` tutorial.
 
 ### How to setup rustup?
 
@@ -45,5 +44,12 @@ $ mkdir -p esp/EFI/BOOT
 
 $ cp target/x86_64-unknown-uefi/release/bootloader.efi esp/EFI/BOOT/BOOTX64.EFI
 
-$ qemu-system-x86_64 -bios /where-ovmf-directory/OVMF_CODE.fd -drive format=raw,file=fat:rw:esp -m 1024
+$ qemu-system-x86_64 -bios /where-ovmf-directory/OVMF_CODE.fd -drive format=raw,file=fat:rw:esp -m 1024 # for this, use legacy branch
+```
+
+If use virti-manager with alpine
+```
+# mkdir -p /boot/efi/EFI/lazyboot
+# cp /boot/vmlinuz-lts /boot/efi/EFI/lazyboot/
+# cp /boot/initramfs-lts /boot/efi/EFI/lazyboot/
 ```
