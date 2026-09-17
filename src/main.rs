@@ -219,8 +219,10 @@ pub extern "efiapi" fn efi_main(image_handle: Handle, system_table: *mut SystemT
                     if ((*file_system).open_volume)(file_system, &mut root_dir) == Status::SUCCESS {
                         let mut kernel_file: *mut FileProtocol = core::ptr::null_mut();
                         let kernel_path = [
-                            b'\\' as u16, b'b' as u16, b'o' as u16, b'o' as u16, b't' as u16, b'\\' as u16,
-                            b'v' as u16, b'm' as u16, b'l' as u16, b'i' as u16, b'n' as u16, b'u' as u16, b'z' as u16, b'-' as u16, b'l' as u16, b't' as u16, b's' as u16, 0
+                            b'\\' as u16, b'E' as u16, b'F' as u16, b'I' as u16, b'\\' as u16,
+                            b'l' as u16, b'a' as u16, b'z' as u16, b'y' as u16, b'b' as u16, b'o' as u16, b'o' as u16, b't' as u16, b'\\' as u16,
+                            b'v' as u16, b'm' as u16, b'l' as u16, b'i' as u16, b'n' as u16, b'u' as u16, b'z' as u16,
+                            b'-' as u16, b'l' as u16, b't' as u16, b's' as u16, 0
                         ];
 
                         if ((*root_dir).open)(root_dir, &mut kernel_file, kernel_path.as_ptr(), 1, 0) == Status::SUCCESS {
@@ -250,7 +252,7 @@ pub extern "efiapi" fn efi_main(image_handle: Handle, system_table: *mut SystemT
                                         );
 
                                         if load_proto_status == Status::SUCCESS {
-                                            let cmdline_str = "initrd=\\boot\\initramfs-lts root=/dev/vda3 rw  rootfstype=ext4 modules=ext4 earlycon=efifb console=tty0 loglevel=7\0";
+                                            let cmdline_str = "initrd=\\EFI\\lazyboot\\initramfs-lts root=/dev/vda3 rw rootfstype=ext4 modules=ext4 earlycon=efifb console=tty0 loglevel=quiet\0";
                                             let mut cmdline_utf16: [u16; 128] = [0; 128];
                                             let mut cmd_len = 0;
 
